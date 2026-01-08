@@ -1,0 +1,482 @@
+@use "../../../Styles/variable" as *;
+@use "../../../Styles/mixins" as *;
+@use "../../../Styles/grid" as *;
+
+/* Admin component styles modeled after Account Address layout */
+.adminWrapper {
+    @include body-400;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 100%;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid $accent-color;
+
+        .title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+    }
+
+    .board {
+        border: 0.5px solid $accent-color;
+        padding: 1rem;
+        border-radius: 4px;
+        background: $secondary-color;
+    }
+}
+
+.popUpOverLay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popUpCreateProduct,
+.popUpProduct,
+.popUpUser {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 1rem 1.5rem;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    color: $primary-color;
+    border: 0.5px solid $accent-color;
+    width: min(900px, 95%);
+    max-height: 90vh;
+    overflow: auto;
+    border-radius: 4px;
+
+    .tableInfo {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    label {
+        @include body-600;
+        padding-right: 0.5rem;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    input:not([type="file"]),
+    select,
+    textarea {
+        border: 0.5px solid $accent-color;
+        padding: 0.25rem 0.5rem;
+        background-color: $surface;
+        color: $text-dark;
+        color: $primary-color;
+        font-size: 1rem;
+    }
+
+    input:not([type="checkbox"]) {
+        width: 100%;
+    }
+
+    textarea {
+        display: flex;
+        resize: none;
+        padding: 0.5rem;
+        width: 100%;
+    }
+    .description {
+        grid-column: span 2;
+    }
+
+    .imagePreview {
+        grid-column: span 2;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 0.5px solid $accent-color;
+        }
+    }
+            color: $text-dark;
+    .groupBtn {
+        grid-column: span 2;
+        justify-self: flex-end;
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .returnBtn,
+    .completeBtn {
+        max-width: 220px;
+
+        &:hover {
+            span {
+                color: $primary-color;
+            }
+        }
+    }
+
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+}
+
+.adminTable {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background: $secondary-color;
+    }
+
+    th,
+    td {
+        padding: 0.75rem 0.5rem;
+        border-bottom: 0.5px solid $accent-color;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .rowActions {
+        display: flex;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 720px) {
+
+    .popUpCreateProduct .body,
+    .popUpProduct .body {
+        grid-template-columns: 1fr;
+    }
+
+    .adminWrapper .header .title {
+        font-size: 1rem;
+    }
+}
+
+.createBtn {
+    border: 0.5px solid $primary-color;
+
+    span {
+        color: #000;
+
+    }
+
+    &:hover {
+        span {
+            color: #fff;
+
+        }
+    }
+}
+
+// PopUpOrder Styles
+.popupOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.popupContainer {
+    position: relative;
+    background-color: #fff;
+    color: $primary-color;
+    border: 0.5px solid $accent-color;
+    width: min(600px, 95%);
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease-out;
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}
+
+.popupHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid $accent-color;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+
+    h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: $primary-color;
+    }
+}
+
+.orderId {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.popupContent {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border: 0.5px solid $accent-color;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+
+    .label {
+        @include body-600;
+        color: $primary-color;
+        min-width: 100px;
+    }
+
+    .value {
+        text-align: right;
+        flex: 1;
+        padding-left: 1rem;
+
+        &.pending {
+            color: #f59e0b;
+            font-weight: 500;
+        }
+
+        &.completed {
+            color: #10b981;
+            font-weight: 500;
+        }
+
+        &.cancelled {
+            color: #ef4444;
+            font-weight: 500;
+        }
+
+        &.shipped {
+            color: #3b82f6;
+            font-weight: 500;
+        }
+    }
+}
+
+.itemsSection {
+    h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: $primary-color;
+    }
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.itemCard {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border: 0.5px solid $accent-color;
+    transition: background 0.2s ease;
+
+    &:hover {
+        background: #f5f5f5;
+    }
+}
+
+.itemInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.itemName {
+    margin: 0;
+    font-weight: 600;
+    color: $primary-color;
+    font-size: 0.95rem;
+}
+
+.itemPrice {
+    margin: 0;
+    color: #10b981;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.itemQuantity {
+    white-space: nowrap;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.itemTotal {
+    text-align: right;
+    font-weight: 600;
+    color: $primary-color;
+    font-size: 0.95rem;
+}
+
+.noItems {
+    padding: 1rem;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+.addressSection {
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border: 0.5px solid $accent-color;
+
+    h3 {
+        margin: 0 0 0.75rem 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $primary-color;
+    }
+}
+
+.address {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.popupFooter {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid $accent-color;
+    background: #f9f9f9;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.closeBtn {
+    padding: 0.5rem 1.5rem;
+    background: #f3f4f6;
+    color: $primary-color;
+    border: 0.5px solid $accent-color;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: $primary-color;
+        color: #fff;
+        border-color: $primary-color;
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    .popupContainer {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .itemCard {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+
+        .itemQuantity,
+        .itemTotal {
+            text-align: left;
+        }
+    }
+
+    .infoRow {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .value {
+            text-align: left;
+            padding-left: 0;
+            padding-top: 0.25rem;
+        }
+    }
+
+    .popupHeader {
+        padding: 1rem;
+
+        h2 {
+            font-size: 1.25rem;
+        }
+    }
+
+    .popupContent,
+    .popupFooter {
+        padding: 1rem;
+    }
+}

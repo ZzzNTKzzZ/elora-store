@@ -1,0 +1,125 @@
+// index.scss
+@use "./variable" as *;
+@use "./grid" as *;
+@use "./reset" as *;
+@use "./mixins" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+        /* thin scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $muted;
+        /* optional: thumb color */
+        border-radius: 10px;
+    }
+}
+
+body {
+    font-size: 16px;
+    background-color: $primary-color;
+    color: $text-color;
+    overflow-x: hidden;
+
+}
+
+/* Layout container to center page content */
+.container {
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.6; // optional, to visually show it's disabled
+}
+
+h1 {
+    @include heading-400;
+    font-size: 4.25rem;
+}
+
+h2 {
+    @include body-600;
+}
+
+h3 {
+    @include body-600;
+    font-size: 3rem;
+    letter-spacing: 6px;
+}
+
+p {
+    @include body-400;
+}
+
+label {
+    @include body-400;
+    font-size: 1rem;
+}
+
+.checkboxInput {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $surface;
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:checked {
+        background-color: transparent;
+        border-color: $surface;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 5px;
+            width: 4px;
+            height: 8px;
+            border: solid $surface;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+
+        &.white {
+        &:checked {
+            background-color: transparent;
+            border-color: $accent-color;
+            position: relative;
+
+        }
+        &::after {
+            position: absolute;
+            top: 3px;
+            left: 7px;
+            width: 4px;
+            height: 8px;
+            border: solid $text-dark;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+}

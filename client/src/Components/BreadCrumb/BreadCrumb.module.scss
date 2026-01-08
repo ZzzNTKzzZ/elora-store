@@ -1,0 +1,26 @@
+@use "../../Styles/variable" as *;
+@use "../../Styles/mixins" as *;
+.breadcrumb {
+  @include body-400;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 6px;
+  a {
+    text-decoration: none;
+    color: $text-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .separator {
+    color: $accent-color;
+  }
+
+  .current {
+    color: $text-color;
+    font-weight: 500;
+  }
+}

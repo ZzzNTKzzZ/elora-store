@@ -1,0 +1,40 @@
+@use "../../Styles/variable" as *;
+@use "../../Styles/mixins" as *;
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    border: 2px solid $accent-color;
+    border-radius: 2px;
+    color: $text-color;
+    &.withIcon {
+        input {
+            width: 80%;
+        }
+    }
+
+    label {
+        padding-right: 0.5rem;
+        font-size: 1.25rem
+    }
+
+    input {
+        @include body-400;
+        font-size: 1.25rem;
+        color: $text-color;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        padding-inline: 0.75rem;
+        height: 100%;
+        width: 100%;
+    }
+
+    .icon {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-left: 1px solid $secondary-color;
+    }
+}
